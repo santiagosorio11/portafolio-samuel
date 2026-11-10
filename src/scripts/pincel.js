@@ -4,7 +4,7 @@
   grosor, temblor y zonas secas. Se dibuja por tramos, así el costo por cuadro
   es mínimo aunque el trazo sea enorme.
 */
-(function () {
+export const Pincel = (function () {
   "use strict";
 
   var RETRASO = 0.16;
@@ -190,5 +190,5 @@
     return pts;
   }
 
-  window.Pincel = { azar: azar, crearTrazo: crearTrazo, dibujarHasta: dibujarHasta, animar: animar, preparar: preparar, ondulada: ondulada, posicion: posicion };
+  return { azar: azar, crearTrazo: crearTrazo, dibujarHasta: dibujarHasta, animar: animar, preparar: preparar, ondulada: ondulada, posicion: posicion };
 })();

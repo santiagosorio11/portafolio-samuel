@@ -1,0 +1,125 @@
+---
+import Base from "../../layouts/Base.astro";
+import Icono from "../../components/Icono.astro";
+import "../../styles/admin.css";
+const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_ANON_KEY);
+---
+<Base titulo="Panel de obras | Sam Velásquez" descripcion="Administración de la galería." sinIndexar>
+  <div class="adm">
+    <header class="adm-barra">
+      <a class="adm-marca" href="/admin">
+        <img src="/assets/marca/sol.webp" width="1004" height="1218" alt="" />
+        <span>Panel de obras</span>
+      </a>
+      <a class="adm-enlace" href="/" target="_blank" rel="noopener"><Icono n="externo" />Ver sitio</a>
+      <button class="adm-enlace" id="salir" type="button" hidden><Icono n="salir" />Salir</button>
+    </header>
+
+    <main class="adm-cuerpo">
+      {!configurado && (
+        <section class="adm-tarjeta adm-centro">
+          <h1>Falta conectar Supabase</h1>
+          <p>Agrega PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_ANON_KEY al archivo .env (y en Vercel), y vuelve a iniciar el sitio.</p>
+        </section>
+      )}
+
+      <section class="adm-tarjeta adm-centro" id="vista-cargando" hidden={!configurado}>
+        <p>Cargando…</p>
+      </section>
+
+      <section class="adm-tarjeta adm-centro" id="vista-login" hidden>
+        <h1>Entrar</h1>
+        <form id="form-login" class="adm-form" novalidate>
+          <label>Correo<input name="correo" type="email" autocomplete="username" required /></label>
+          <label>Contraseña<input name="clave" type="password" autocomplete="current-password" required /></label>
+          <p class="adm-error" role="alert" hidden></p>
+          <button class="boton boton--oro" type="submit">Entrar</button>
+          <button class="adm-texto" type="button" id="olvide">Olvidé mi contraseña</button>
+        </form>
+      </section>
+
+      <section class="adm-tarjeta adm-centro" id="vista-clave" hidden>
+        <h1>Nueva contraseña</h1>
+        <form id="form-clave" class="adm-form" novalidate>
+          <label>Nueva contraseña<input name="clave" type="password" autocomplete="new-password" minlength="8" required /></label>
+          <p class="adm-ayuda">Mínimo 8 caracteres.</p>
+          <p class="adm-error" role="alert" hidden></p>
+          <button class="boton boton--oro" type="submit">Guardar contraseña</button>
+        </form>
+      </section>
+
+      <section id="vista-lista" hidden>
+        <div class="adm-cabeza">
+          <div>
+            <h1>Obras <span id="conteo"></span></h1>
+            <p class="adm-ayuda">Los cambios se ven en el sitio en más o menos un minuto. El orden de esta lista es el orden del muro.</p>
+          </div>
+          <button class="boton boton--oro" id="nueva" type="button"><Icono n="mas" />Nueva obra</button>
+        </div>
+        <p class="adm-error" id="error-lista" role="alert" hidden></p>
+        <ul class="adm-lista" id="lista"></ul>
+        <div class="adm-tarjeta adm-centro" id="lista-vacia" hidden>
+          <p>Todavía no hay obras. Sube la primera con el botón “Nueva obra”.</p>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="adm-dialogo" id="editor" aria-labelledby="editor-titulo">
+      <form id="form-obra" class="adm-form" novalidate>
+        <div class="adm-dialogo__cabeza">
+          <h2 id="editor-titulo">Nueva obra</h2>
+          <button type="button" class="adm-icono" data-cerrar aria-label="Cerrar"><Icono n="cerrar" /></button>
+        </div>
+        <div class="adm-editor">
+          <div class="adm-foto">
+            <label class="adm-foto__zona" id="zona-foto">
+              <img id="vista-foto" alt="" hidden />
+              <span id="texto-foto"><Icono n="foto" />Elegir foto de la obra</span>
+              <input name="foto" type="file" accept="image/jpeg,image/png,image/webp" />
+            </label>
+            <p class="adm-ayuda">JPG, PNG o WEBP. Se ajusta sola a un tamaño liviano antes de subirse.</p>
+          </div>
+          <div class="adm-campos">
+            <label class="ancho">Título *<input name="titulo" maxlength="120" required /></label>
+            <label class="ancho">Técnica<input name="tecnica" maxlength="160" placeholder="Acrílico y estuco plástico sobre madera" /></label>
+            <label>Soporte
+              <select name="soporte">
+                <option value="lienzo">Lienzo</option>
+                <option value="madera">Madera</option>
+                <option value="escultura">Escultura</option>
+                <option value="otro">Otro</option>
+              </select>
+            </label>
+            <label>Año<input name="anio" type="number" inputmode="numeric" min="1990" max="2100" /></label>
+            <label>Ancho (cm)<input name="ancho_cm" inputmode="decimal" /></label>
+            <label>Alto (cm)<input name="alto_cm" inputmode="decimal" /></label>
+            <label class="ancho">Historia<textarea name="historia" rows="6" maxlength="3000"></textarea></label>
+            <label class="ancho">Precio<input name="precio" maxlength="60" placeholder="Vacío muestra “Precio a consultar”" /></label>
+            <div class="ancho adm-checks">
+              <label class="adm-check"><input name="visible" type="checkbox" checked />Visible en el sitio</label>
+              <label class="adm-check"><input name="vendida" type="checkbox" />Vendida</label>
+              <label class="adm-check"><input name="destacada" type="checkbox" />En la portada</label>
+            </div>
+          </div>
+        </div>
+        <p class="adm-error" role="alert" hidden></p>
+        <div class="adm-dialogo__pie">
+          <button type="button" class="boton boton--linea" data-cerrar>Cancelar</button>
+          <button type="submit" class="boton boton--oro" id="guardar">Guardar obra</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="adm-dialogo adm-dialogo--chico" id="confirmar" aria-labelledby="confirmar-titulo">
+      <h2 id="confirmar-titulo">¿Eliminar esta obra?</h2>
+      <p id="confirmar-texto"></p>
+      <div class="adm-dialogo__pie">
+        <button type="button" class="boton boton--linea" data-cerrar>Cancelar</button>
+        <button type="button" class="boton adm-peligro" id="confirmar-si">Eliminar</button>
+      </div>
+    </dialog>
+
+    <div class="adm-aviso" id="aviso" role="status" aria-live="polite"></div>
+  </div>
+  {configurado && <script>import "../../scripts/admin.js";</script>}
+</Base>

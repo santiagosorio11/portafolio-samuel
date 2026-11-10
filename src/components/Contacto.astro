@@ -1,0 +1,20 @@
+---
+import Icono from "./Icono.astro";
+import { enlaceWa, MENSAJES } from "../lib/contacto";
+---
+<section class="contacto" id="contacto">
+      <div class="contacto__texto">
+        <img class="contacto__sol" src="/assets/marca/sol-firma.webp" width="683" height="791" loading="lazy" alt="Logo de Sam Velásquez">
+        <h2 class="titulo titulo--gran" data-rev>Infinitas gracias</h2>
+        <p data-rev>Que cada obra sea un recordatorio de la luz, la intención y la energía que habita en todo.</p>
+        <a class="boton boton--oro boton--grande" href={enlaceWa(MENSAJES.saludo)} target="_blank" rel="noopener" data-rev><Icono n="whatsapp" />Escríbeme</a>
+        <ul class="contacto__datos" data-rev>
+          <li><a href={enlaceWa(MENSAJES.saludo)} target="_blank" rel="noopener"><Icono n="whatsapp" />320 500 3237</a></li>
+          <li><a href="mailto:samuelandresosoriovelasquez@gmail.com"><Icono n="correo" />samuelandresosoriovelasquez@gmail.com</a></li>
+          <li><a href="https://www.instagram.com/samvelasquezart/" target="_blank" rel="noopener"><Icono n="instagram" />samvelasquezart</a></li>
+        </ul>
+      </div>
+      <figure class="contacto__foto">
+        <img src="/assets/fotos/sam-pincel.webp" width="1280" height="1600" loading="lazy" alt="Retrato de Sam Velásquez con un pincel frente a su obra">
+      </figure>
+    </section>

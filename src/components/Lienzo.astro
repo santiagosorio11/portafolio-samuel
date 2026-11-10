@@ -1,0 +1,28 @@
+---
+import type { Obra } from "../lib/obras";
+interface Props { obra: Obra; prioridad?: boolean }
+const { obra, prioridad = false } = Astro.props;
+const lados = obra.soporte === "escultura" ? [] : ["d", "i", "s", "a"];
+---
+<button
+  type="button"
+  class={"lienzo lienzo--" + obra.soporte}
+  aria-haspopup="dialog"
+  aria-label={"Ver " + obra.titulo + ", " + obra.medidas + (obra.anio ? ", " + obra.anio : "")}
+  data-slug={obra.slug}
+>
+  <span class="lienzo__giro">
+    <span class="lienzo__cuerpo" style={`aspect-ratio:${obra.imagen_ancho}/${obra.imagen_alto}`}>
+      <img
+        src={obra.imagen_url}
+        width={obra.imagen_ancho}
+        height={obra.imagen_alto}
+        alt={obra.titulo}
+        loading={prioridad ? "eager" : "lazy"}
+        decoding="async"
+        fetchpriority={prioridad ? "high" : undefined}
+      />
+      {lados.map((l) => <span class={"lado lado--" + l} style={`background-image:url("${obra.imagen_url}")`}></span>)}
+    </span>
+  </span>
+</button>

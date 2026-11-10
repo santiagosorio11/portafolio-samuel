@@ -1,0 +1,6 @@
+---
+import iconos from "../data/iconos.json";
+interface Props { n: keyof typeof iconos }
+const { n } = Astro.props;
+---
+<i data-icono={n} aria-hidden="true" set:html={iconos[n]}></i>

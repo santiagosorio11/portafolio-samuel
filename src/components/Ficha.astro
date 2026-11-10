@@ -1,0 +1,35 @@
+---
+import Icono from "./Icono.astro";
+---
+<dialog id="ficha" aria-labelledby="ficha-titulo">
+    <div class="ficha__fondo"></div>
+    <canvas class="ficha__trazos" id="ficha-trazos" aria-hidden="true"></canvas>
+    <div class="ficha__plano" id="ficha-plano">
+      <figure class="ficha__obra">
+        <img id="ficha-img" alt="">
+      </figure>
+      <div class="ficha__info" id="ficha-info">
+        <h2 id="ficha-titulo" data-ap></h2>
+        <dl class="ficha__datos" data-ap>
+          <div><dt>Técnica</dt><dd id="ficha-tecnica"></dd></div>
+          <div><dt>Medidas</dt><dd id="ficha-medidas"></dd></div>
+          <div><dt>Año</dt><dd id="ficha-anio"></dd></div>
+        </dl>
+        <h3 data-ap>La historia</h3>
+        <p class="ficha__historia" id="ficha-historia" data-ap></p>
+        <div class="ficha__escala" data-ap>
+          <svg id="ficha-escala" viewBox="0 0 240 180" role="img" aria-label="Tamaño de la obra junto a una persona"></svg>
+          <p>Su tamaño junto a una persona de 1,70 m.</p>
+        </div>
+        <div class="ficha__compra" data-ap>
+          <p id="ficha-precio"></p>
+          <a class="boton boton--oro boton--grande" id="ficha-wa" target="_blank" rel="noopener"><Icono n="whatsapp" /><span id="ficha-wa-texto">Me interesa esta obra</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="ficha__controles">
+      <button type="button" id="ficha-prev" aria-label="Obra anterior"><Icono n="izq" /></button>
+      <button type="button" id="ficha-next" aria-label="Obra siguiente"><Icono n="der" /></button>
+      <button type="button" id="ficha-cerrar" aria-label="Cerrar"><Icono n="cerrar" /></button>
+    </div>
+  </dialog>

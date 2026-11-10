@@ -1,0 +1,16 @@
+{
+  "name": "galeria-sami-velasquez",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sembrar": "node --env-file=.env scripts/sembrar.mjs"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "11.0.16",
+    "@supabase/supabase-js": "2.118.0",
+    "astro": "7.4.2"
+  }
+}

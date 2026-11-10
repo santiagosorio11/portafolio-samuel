@@ -1,0 +1,70 @@
+---
+import Base from "../layouts/Base.astro";
+import Intro from "../components/Intro.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Galeria from "../components/Galeria.astro";
+import Artista from "../components/Artista.astro";
+import Inspiracion from "../components/Inspiracion.astro";
+import Tecnicas from "../components/Tecnicas.astro";
+import Evolucion from "../components/Evolucion.astro";
+import Ritual from "../components/Ritual.astro";
+import Enfoque from "../components/Enfoque.astro";
+import Comienzo from "../components/Comienzo.astro";
+import Contacto from "../components/Contacto.astro";
+import Pie from "../components/Pie.astro";
+import Ficha from "../components/Ficha.astro";
+import { cargarObras } from "../lib/obras";
+
+/* Se arma en cada visita para mostrar las obras al día; la CDN guarda la página un minuto. */
+export const prerender = false;
+
+const { obras, error } = await cargarObras();
+Astro.response.headers.set("Cache-Control", "public, max-age=0, s-maxage=60, stale-while-revalidate=600");
+const datos = JSON.stringify(
+  obras.map(({ slug, titulo, tecnica, soporte, ancho_cm, alto_cm, anio, historia, precio, vendida, imagen_url, imagen_ancho, imagen_alto, paleta, medidas }) => ({
+    slug, titulo, tecnica, soporte, ancho_cm, alto_cm, anio, historia, precio, vendida, imagen_url, imagen_ancho, imagen_alto, paleta, medidas,
+  }))
+).replace(/</g, "\\u003c");
+const portada = obras.find((o) => o.destacada) ?? obras[0];
+---
+<Base
+  titulo="Sam Velásquez | Obras que nacen del alma"
+  descripcion="Galería de Sam Velásquez, artista de Medellín. Pinturas y esculturas creadas con intención. Conoce la historia de cada obra y adquiérela por WhatsApp."
+>
+  <Fragment slot="head">
+    {portada && <link rel="preload" href={portada.imagen_url} as="image" />}
+    <script is:inline>
+      (function () {
+        var h = document.documentElement;
+        h.classList.add("js");
+        var vista = false;
+        try { vista = sessionStorage.getItem("intro-vista") === "1"; } catch (e) {}
+        var reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (/[?&]intro\b/.test(location.search)) vista = false;
+        if (location.hash.indexOf("#obra/") === 0) vista = true;
+        if (!vista && !reducir) h.classList.add("con-intro");
+      })();
+    </script>
+  </Fragment>
+  <Intro />
+  <Nav />
+  <main>
+    <Hero obras={obras} />
+    <Galeria obras={obras} error={error} />
+    <Artista />
+    <Inspiracion />
+    <Tecnicas />
+    <Evolucion />
+    <Ritual />
+    <Enfoque />
+    <Comienzo />
+    <Contacto />
+  </main>
+  <Pie />
+  <Ficha />
+  <script type="application/json" id="datos-obras" set:html={datos}></script>
+  <script>
+    import "../scripts/sitio.js";
+  </script>
+</Base>
