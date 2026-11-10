@@ -1,6 +1,5 @@
 import { Pincel as P } from "./pincel.js";
 import iconos from "../data/iconos.json";
-import { enlaceWa } from "../lib/contacto";
 
 var raiz = document.documentElement;
 var reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -10,6 +9,8 @@ var $ = function (s, c) { return (c || document).querySelector(s); };
 var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
 var OBRAS = JSON.parse($("#datos-obras").textContent || "[]");
+var SITIO = JSON.parse(($("#datos-sitio") || {}).textContent || "{}");
+function enlaceWa(mensaje) { return "https://wa.me/" + (SITIO.wa || "") + "?text=" + encodeURIComponent(mensaje); }
 var porSlug = {};
 OBRAS.forEach(function (o) { porSlug[o.slug] = o; });
 
@@ -370,12 +371,17 @@ function llenar(obra) {
   $("#ficha-anio").textContent = obra.anio || "Sin especificar";
   $("#ficha-historia").textContent = obra.historia;
   $("#ficha-historia").previousElementSibling.hidden = !obra.historia;
-  $("#ficha-precio").textContent = obra.vendida ? "Esta obra ya hace parte de una colección privada." : obra.precio || "Precio a consultar";
-  $("#ficha-wa-texto").textContent = obra.vendida ? "Quiero una similar" : "Me interesa esta obra";
+  var aLaVenta = obra.estado === "disponible";
+  $("#ficha-precio").textContent =
+    obra.estado === "vendida" ? "Esta obra ya hace parte de una colección privada."
+    : obra.estado === "reservada" ? "Esta obra está reservada."
+    : obra.estado === "no_disponible" ? "Esta obra no está a la venta."
+    : obra.precio || "Precio a consultar";
+  $("#ficha-wa-texto").textContent = aLaVenta ? "Me interesa esta obra" : "Quiero una similar";
   var datos = [obra.tecnica, obra.medidas, obra.anio].filter(Boolean).join(", ");
-  var msg = obra.vendida
-    ? "Hola Sam, vi la obra “" + obra.titulo + "” en tu galería web y me gustaría encargar una similar."
-    : "Hola Sam, vi la obra “" + obra.titulo + "”" + (datos ? " (" + datos + ")" : "") + " en tu galería web y me interesa adquirirla. ¿Me cuentas el precio y si está disponible?";
+  var msg = aLaVenta
+    ? "Hola Sam, vi la obra “" + obra.titulo + "”" + (datos ? " (" + datos + ")" : "") + " en tu galería web y me interesa adquirirla. ¿Me cuentas el precio y si está disponible?"
+    : "Hola Sam, vi la obra “" + obra.titulo + "” en tu galería web y me gustaría encargar una similar.";
   $("#ficha-wa").href = enlaceWa(msg);
   ficha.style.setProperty("--tinte", obra.paleta[0]);
   escala(obra);

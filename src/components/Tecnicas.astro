@@ -1,33 +1,26 @@
+---
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
+const colores = ["var(--rosa)", "var(--durazno)", "var(--cielo)", "var(--limon)"];
+const tiras = colores.map((color, i) => ({
+  color,
+  titulo: c.t(`tecnicas.${i + 1}.titulo`),
+  texto: c.t(`tecnicas.${i + 1}.texto`),
+  img: c.img(`tecnicas.${i + 1}.imagen`),
+}));
+---
 <section class="tecnicas" id="tecnicas">
-      <h2 class="titulo" data-rev>Técnicas</h2>
+      <h2 class="titulo" data-rev>{c.t("tecnicas.titulo")}</h2>
       <div class="tiras" id="tiras">
-        <article class="tira activa" tabindex="0" style="--c:var(--rosa)">
-          <img src="/assets/obras/jardin-dual.webp" width="590" height="654" loading="lazy" alt="Detalle de Jardín Dual">
-          <div class="tira__texto">
-            <h3>Técnica mixta</h3>
-            <p>Acrílico, óleo y estuco plástico para crear profundidad visual y riqueza material, junto a esculturas moldeadas en arcilla.</p>
-          </div>
-        </article>
-        <article class="tira" tabindex="0" style="--c:var(--durazno)">
-          <img src="/assets/obras/danza-estelar.webp" width="590" height="589" loading="lazy" alt="Detalle de Danza Estelar">
-          <div class="tira__texto">
-            <h3>Relieve y texturización</h3>
-            <p>El estuco plástico genera volumen, movimiento y una experiencia sensorial más allá de lo visual.</p>
-          </div>
-        </article>
-        <article class="tira" tabindex="0" style="--c:var(--cielo)">
-          <img src="/assets/obras/amor-que-sostiene.webp" width="590" height="600" loading="lazy" alt="Detalle de Amor que Sostiene">
-          <div class="tira__texto">
-            <h3>Capa y superposición</h3>
-            <p>Múltiples capas de pintura dejan que la energía y el proceso se acumulen en el lienzo.</p>
-          </div>
-        </article>
-        <article class="tira" tabindex="0" style="--c:var(--limon)">
-          <img src="/assets/obras/el-viaje-hacia-adentro.webp" width="452" height="589" loading="lazy" alt="Detalle de El Viaje Hacia Adentro">
-          <div class="tira__texto">
-            <h3>Intención energética</h3>
-            <p>Un proceso ritual carga cada obra con una intención específica, como armonía, abundancia o paz.</p>
-          </div>
-        </article>
+        {tiras.map((t, i) => (
+          <article class={"tira" + (i === 0 ? " activa" : "")} tabindex="0" style={"--c:" + t.color}>
+            <img src={t.img.src} width={t.img.ancho} height={t.img.alto} loading="lazy" alt={t.img.alt}>
+            <div class="tira__texto">
+              <h3>{t.titulo}</h3>
+              <p>{t.texto}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>

@@ -1,17 +1,23 @@
+---
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
+const fotos = [1, 2, 3].map((n) => c.img("ritual.foto" + n));
+const practicas = c.lineas("ritual.practicas");
+---
 <section class="ritual" id="ritual">
       <div class="ritual__fotos" aria-hidden="true">
-        <img src="/assets/fotos/ritual-sentado.webp" loading="lazy" alt="">
-        <img src="/assets/fotos/ritual-cuarzos.webp" loading="lazy" alt="">
-        <img src="/assets/fotos/ritual-cuencos.webp" loading="lazy" alt="">
+        {fotos.map((f) => <img src={f.src} width={f.ancho} height={f.alto} loading="lazy" alt="">)}
       </div>
       <div class="ritual__panel" data-rev>
-        <h2 class="titulo">Ritual energético</h2>
-        <p>Cada obra es acompañada por un proceso de intención consciente que la armoniza y la carga, convirtiéndola en un canal de energía, equilibrio y significado.</p>
+        <h2 class="titulo">{c.t("ritual.titulo")}</h2>
+        <p>{c.t("ritual.texto")}</p>
       </div>
-      <div class="cinta" aria-label="Prácticas del ritual: Ho’oponopono, vibración de cuencos, inciensos, luz solar, cuarzos y mantras">
-        <div class="cinta__pista" aria-hidden="true">
-          <span>Ho’oponopono</span><span>Vibración de cuencos</span><span>Inciensos</span><span>Luz solar</span><span>Cuarzos</span><span>Mantras</span>
-          <span>Ho’oponopono</span><span>Vibración de cuencos</span><span>Inciensos</span><span>Luz solar</span><span>Cuarzos</span><span>Mantras</span>
+      {practicas.length > 0 && (
+        <div class="cinta" aria-label={"Prácticas del ritual: " + practicas.join(", ")}>
+          <div class="cinta__pista" aria-hidden="true">
+            {[...practicas, ...practicas].map((p) => <span>{p}</span>)}
+          </div>
         </div>
-      </div>
+      )}
     </section>

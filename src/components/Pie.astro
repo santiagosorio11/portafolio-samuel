@@ -1,3 +1,8 @@
+---
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
+---
 <footer class="pie">
-    <p>© 2026 Sam Velásquez. Medellín, Colombia.</p>
+    <p>{c.t("pie.texto")}</p>
   </footer>

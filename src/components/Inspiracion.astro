@@ -1,6 +1,14 @@
+---
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
+/* Las palabras entre *asteriscos* se resaltan, alternando estos colores. */
+const colores = ["var(--menta)", "var(--durazno)", "var(--lila)", "var(--rosa)", "var(--cielo)"];
+const partes = c.t("inspiracion.texto").split(/\*([^*]+)\*/);
+---
 <section class="inspiracion" id="inspiracion">
       <p class="inspiracion__gran" data-rev>
-        Mis obras se inspiran en la <mark style="--c:var(--menta)">naturaleza</mark>, la <mark style="--c:var(--durazno)">energía</mark> y la <mark style="--c:var(--lila)">espiritualidad</mark> que habita en lo cotidiano.
+        {partes.map((p, i) => (i % 2 ? <mark style={"--c:" + colores[((i - 1) / 2) % colores.length]}>{p}</mark> : p))}
       </p>
-      <p class="inspiracion__sub" data-rev>Animales, formas orgánicas y cuerpos celestes se convierten en metáforas de transformación, equilibrio y conexión interior.</p>
+      <p class="inspiracion__sub" data-rev>{c.t("inspiracion.sub")}</p>
     </section>

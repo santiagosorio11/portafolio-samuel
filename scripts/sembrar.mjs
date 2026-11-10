@@ -1,16 +1,19 @@
 /*
-  Sube las 10 obras del dossier a Supabase (fotos al bucket y filas a la tabla).
+  Sube las obras de src/data/obras-iniciales.json a Supabase (fotos al bucket y filas a la tabla).
+  Los textos e imágenes del sitio no se siembran: salen de src/data/contenido.json
+  hasta que Samuel los cambie desde el panel.
   Uso, una sola vez y desde tu computador:  npm run sembrar
-  Necesita en .env: PUBLIC_SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY.
+  Necesita en .env: PUBLIC_SUPABASE_URL y una llave secreta: SUPABASE_SECRET_KEY (sb_secret_...)
+  o, con las llaves antiguas, SUPABASE_SERVICE_ROLE_KEY.
   Si la tabla ya tiene obras, no hace nada.
 */
 import { readFile } from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
 
 const url = process.env.PUBLIC_SUPABASE_URL;
-const llave = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const llave = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!url || !llave) {
-  console.error("Faltan PUBLIC_SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY en el archivo .env");
+  console.error("Faltan PUBLIC_SUPABASE_URL o SUPABASE_SECRET_KEY (o SUPABASE_SERVICE_ROLE_KEY) en el archivo .env");
   process.exit(1);
 }
 

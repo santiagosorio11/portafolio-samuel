@@ -1,16 +1,17 @@
 ---
 import Lienzo from "./Lienzo.astro";
-import { enlaceWa, MENSAJES } from "../lib/contacto";
 import { mosaico } from "../lib/mosaico";
-import type { Obra } from "../lib/obras";
-interface Props { obras: Obra[]; error: boolean }
-const { obras, error } = Astro.props;
+import { ESTADOS, type Obra } from "../lib/obras";
+import type { Contenido } from "../lib/contenido";
+interface Props { obras: Obra[]; error: boolean; c: Contenido }
+const { obras, error, c } = Astro.props;
+const frase = c.lineas("galeria.frase");
 const { escritorio, movil } = mosaico(obras);
 ---
 <section class="galeria" id="galeria">
   <div class="galeria__cabeza">
-    <h2 class="titulo">La galería</h2>
-    {obras.length > 0 && <p>Abre cualquier lienzo para conocer su historia.</p>}
+    <h2 class="titulo">{c.t("galeria.titulo")}</h2>
+    {obras.length > 0 && <p>{c.t("galeria.ayuda")}</p>}
   </div>
   {obras.length > 0 ? (
     <div class="pared" id="pared" style={`--alto:${escritorio.alto};--alto-m:${movil.alto}`}>
@@ -27,7 +28,7 @@ const { escritorio, movil } = mosaico(obras);
               <h3>{obra.titulo}</h3>
               <p>
                 {obra.medidas}{obra.anio ? ", " + obra.anio : ""}
-                {obra.vendida && <><br />Colección privada</>}
+                {ESTADOS[obra.estado].cartela && <><br />{ESTADOS[obra.estado].cartela}</>}
               </p>
             </div>
           </article>
@@ -35,10 +36,10 @@ const { escritorio, movil } = mosaico(obras);
       })}
     </div>
   ) : (
-    <p class="pared__vacia">{error ? "La galería se está actualizando. Vuelve en unos minutos." : "Muy pronto habrá nuevas obras en este muro."}</p>
+    <p class="pared__vacia">{error ? "La galería se está actualizando. Vuelve en unos minutos." : c.t("galeria.vacia")}</p>
   )}
   <div class="pared__frase" data-rev>
-    <p>“Más que observar,<br />te invito a sentir.”</p>
-    <a class="boton boton--linea" href={enlaceWa(MENSAJES.encargo)} target="_blank" rel="noopener">Encargar una obra</a>
+    <p>{frase.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p>
+    <a class="boton boton--linea" href={c.wa(c.t("mensajes.encargo"))} target="_blank" rel="noopener">{c.t("galeria.boton")}</a>
   </div>
 </section>

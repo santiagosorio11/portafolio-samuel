@@ -4,15 +4,19 @@ import Icono from "../../components/Icono.astro";
 import "../../styles/admin.css";
 const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_ANON_KEY);
 ---
-<Base titulo="Panel de obras | Sam Velásquez" descripcion="Administración de la galería." sinIndexar>
+<Base titulo="Panel | Sam Velásquez" descripcion="Administración de la galería." sinIndexar>
   <div class="adm">
     <header class="adm-barra">
       <a class="adm-marca" href="/admin">
         <img src="/assets/marca/sol.webp" width="1004" height="1218" alt="" />
-        <span>Panel de obras</span>
+        <span>Panel</span>
       </a>
-      <a class="adm-enlace" href="/" target="_blank" rel="noopener"><Icono n="externo" />Ver sitio</a>
-      <button class="adm-enlace" id="salir" type="button" hidden><Icono n="salir" />Salir</button>
+      <nav class="adm-pestanas" id="pestanas" aria-label="Secciones del panel" hidden>
+        <button type="button" data-pestana="obras" aria-current="page">Obras</button>
+        <button type="button" data-pestana="contenido">Textos e imágenes</button>
+      </nav>
+      <a class="adm-enlace" href="/" target="_blank" rel="noopener"><Icono n="externo" /><span class="adm-solo-ancho">Ver sitio</span></a>
+      <button class="adm-enlace" id="salir" type="button" hidden><Icono n="salir" /><span class="adm-solo-ancho">Salir</span></button>
     </header>
 
     <main class="adm-cuerpo">
@@ -48,18 +52,62 @@ const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.e
         </form>
       </section>
 
-      <section id="vista-lista" hidden>
+      <!-- Obras -->
+      <section id="vista-obras" hidden>
         <div class="adm-cabeza">
           <div>
             <h1>Obras <span id="conteo"></span></h1>
             <p class="adm-ayuda">Los cambios se ven en el sitio en más o menos un minuto. El orden de esta lista es el orden del muro.</p>
           </div>
-          <button class="boton boton--oro" id="nueva" type="button"><Icono n="mas" />Nueva obra</button>
+          <div class="adm-cabeza__acciones">
+            <label class="boton boton--linea adm-subir-varias">
+              <Icono n="foto" />Subir varias fotos
+              <input id="varias" type="file" accept="image/jpeg,image/png,image/webp" multiple />
+            </label>
+            <button class="boton boton--oro" id="nueva" type="button"><Icono n="mas" />Nueva obra</button>
+          </div>
         </div>
+
+        <div class="adm-filtros">
+          <div class="adm-chips" id="filtros" role="group" aria-label="Filtrar obras">
+            <button type="button" data-filtro="todas" aria-pressed="true">Todas</button>
+            <button type="button" data-filtro="disponible" aria-pressed="false">Disponibles</button>
+            <button type="button" data-filtro="reservada" aria-pressed="false">Reservadas</button>
+            <button type="button" data-filtro="vendida" aria-pressed="false">Vendidas</button>
+            <button type="button" data-filtro="no_disponible" aria-pressed="false">No disponibles</button>
+            <button type="button" data-filtro="oculta" aria-pressed="false">Ocultas</button>
+          </div>
+          <input class="adm-buscar" id="buscar" type="search" placeholder="Buscar por título" aria-label="Buscar por título" />
+        </div>
+
         <p class="adm-error" id="error-lista" role="alert" hidden></p>
+        <div class="adm-progreso" id="progreso" role="status" hidden>
+          <span id="progreso-texto"></span>
+          <span class="adm-progreso__barra"><span id="progreso-barra"></span></span>
+        </div>
+        <p class="adm-ayuda adm-nota" id="nota-orden" hidden>Para cambiar el orden del muro, quita el filtro y la búsqueda.</p>
         <ul class="adm-lista" id="lista"></ul>
-        <div class="adm-tarjeta adm-centro" id="lista-vacia" hidden>
-          <p>Todavía no hay obras. Sube la primera con el botón “Nueva obra”.</p>
+        <div class="adm-tarjeta adm-centro adm-soltar" id="lista-vacia" hidden>
+          <p>Todavía no hay obras. Toca “Nueva obra” o arrastra aquí las fotos.</p>
+        </div>
+        <p class="adm-ayuda adm-centro-texto" id="sin-resultados" hidden>Ninguna obra coincide con el filtro.</p>
+        <div class="adm-soltar-capa" id="capa-soltar" aria-hidden="true"><p>Suelta las fotos para crear las obras</p></div>
+      </section>
+
+      <!-- Contenido del sitio -->
+      <section id="vista-contenido" hidden>
+        <div class="adm-cabeza">
+          <div>
+            <h1>Textos e imágenes</h1>
+            <p class="adm-ayuda">Cambia lo que dice cada sección del sitio. “Restaurar” vuelve al texto o la imagen original.</p>
+          </div>
+        </div>
+        <p class="adm-error" id="error-contenido" role="alert" hidden></p>
+        <div class="adm-secciones" id="secciones"></div>
+        <div class="adm-guardar" id="barra-guardar" hidden>
+          <span id="pendientes"></span>
+          <button type="button" class="boton boton--linea" id="descartar">Descartar</button>
+          <button type="button" class="boton boton--oro" id="guardar-contenido">Guardar cambios</button>
         </div>
       </section>
     </main>
@@ -74,7 +122,7 @@ const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.e
           <div class="adm-foto">
             <label class="adm-foto__zona" id="zona-foto">
               <img id="vista-foto" alt="" hidden />
-              <span id="texto-foto"><Icono n="foto" />Elegir foto de la obra</span>
+              <span id="texto-foto"><Icono n="foto" />Elegir o arrastrar la foto</span>
               <input name="foto" type="file" accept="image/jpeg,image/png,image/webp" />
             </label>
             <p class="adm-ayuda">JPG, PNG o WEBP. Se ajusta sola a un tamaño liviano antes de subirse.</p>
@@ -93,11 +141,22 @@ const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.e
             <label>Año<input name="anio" type="number" inputmode="numeric" min="1990" max="2100" /></label>
             <label>Ancho (cm)<input name="ancho_cm" inputmode="decimal" /></label>
             <label>Alto (cm)<input name="alto_cm" inputmode="decimal" /></label>
-            <label class="ancho">Historia<textarea name="historia" rows="6" maxlength="3000"></textarea></label>
-            <label class="ancho">Precio<input name="precio" maxlength="60" placeholder="Vacío muestra “Precio a consultar”" /></label>
+            <label class="ancho">Historia<textarea name="historia" rows="6" maxlength="3000"></textarea>
+              <span class="adm-ayuda">Deja una línea en blanco entre párrafos.</span>
+            </label>
+            <fieldset class="ancho adm-estado">
+              <legend>Venta</legend>
+              <div class="adm-chips">
+                <label><input type="radio" name="estado" value="disponible" checked /><span>Disponible</span></label>
+                <label><input type="radio" name="estado" value="reservada" /><span>Reservada</span></label>
+                <label><input type="radio" name="estado" value="vendida" /><span>Vendida</span></label>
+                <label><input type="radio" name="estado" value="no_disponible" /><span>No disponible</span></label>
+              </div>
+              <p class="adm-ayuda" id="ayuda-estado"></p>
+            </fieldset>
+            <label class="ancho" id="campo-precio">Precio<input name="precio" maxlength="60" placeholder="Ejemplo: $4.500.000 COP. Vacío muestra “Precio a consultar”" /></label>
             <div class="ancho adm-checks">
               <label class="adm-check"><input name="visible" type="checkbox" checked />Visible en el sitio</label>
-              <label class="adm-check"><input name="vendida" type="checkbox" />Vendida</label>
               <label class="adm-check"><input name="destacada" type="checkbox" />En la portada</label>
             </div>
           </div>

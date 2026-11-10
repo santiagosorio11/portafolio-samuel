@@ -31,7 +31,7 @@ function cartelaEnUnidades(o: Obra, w: number, pxUnidad: number, tituloPx: numbe
   const anchoPx = w * pxUnidad;
   const meta = o.medidas + ", " + (o.anio ?? "");
   let px = 14 + lineas(o.titulo, tituloPx, anchoPx) * tituloPx * 2.15 + lineas(meta, metaPx, anchoPx) * metaPx * 2.7;
-  if (o.vendida) px += metaPx * 2.7;
+  if (o.estado !== "disponible") px += metaPx * 2.7;
   if (o.soporte === "escultura") px += 8;
   return px / pxUnidad + gap;
 }

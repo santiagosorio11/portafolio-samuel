@@ -1,10 +1,15 @@
+---
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
+const foto = c.img("evolucion.foto");
+---
 <section class="evolucion" id="evolucion">
       <div class="evolucion__texto">
-        <h2 class="titulo" data-rev>De la infancia al gran formato</h2>
-        <p data-rev>Desde mis primeras creaciones en la infancia, el arte ha sido mi forma natural de expresión. Con el tiempo, mi práctica trascendió lo estético para convertirse en un canal de exploración interior y propósito.</p>
-        <p data-rev>He comercializado varias obras de gran formato, permitiendo que mi arte habite y transforme ambientes desde la intención.</p>
+        <h2 class="titulo" data-rev>{c.t("evolucion.titulo")}</h2>
+        {c.parrafos("evolucion.texto").map((p) => <p data-rev>{p}</p>)}
       </div>
       <figure class="evolucion__foto" data-rev>
-        <img src="/assets/fotos/infancia.webp" width="900" height="867" loading="lazy" alt="Sam de niño, sonriendo y abrazando un peluche">
+        <img src={foto.src} width={foto.ancho} height={foto.alto} loading="lazy" alt={foto.alt}>
       </figure>
     </section>

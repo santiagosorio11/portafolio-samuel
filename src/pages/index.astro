@@ -15,22 +15,24 @@ import Contacto from "../components/Contacto.astro";
 import Pie from "../components/Pie.astro";
 import Ficha from "../components/Ficha.astro";
 import { cargarObras } from "../lib/obras";
+import { cargarContenido } from "../lib/contenido";
 
-/* Se arma en cada visita para mostrar las obras al día; la CDN guarda la página un minuto. */
+/* Se arma en cada visita para mostrar obras y textos al día; la CDN guarda la página un minuto. */
 export const prerender = false;
 
-const { obras, error } = await cargarObras();
+const [{ obras, error }, c] = await Promise.all([cargarObras(), cargarContenido()]);
 Astro.response.headers.set("Cache-Control", "public, max-age=0, s-maxage=60, stale-while-revalidate=600");
 const datos = JSON.stringify(
-  obras.map(({ slug, titulo, tecnica, soporte, ancho_cm, alto_cm, anio, historia, precio, vendida, imagen_url, imagen_ancho, imagen_alto, paleta, medidas }) => ({
-    slug, titulo, tecnica, soporte, ancho_cm, alto_cm, anio, historia, precio, vendida, imagen_url, imagen_ancho, imagen_alto, paleta, medidas,
+  obras.map(({ slug, titulo, tecnica, soporte, ancho_cm, alto_cm, anio, historia, precio, estado, imagen_url, imagen_ancho, imagen_alto, paleta, medidas }) => ({
+    slug, titulo, tecnica, soporte, ancho_cm, alto_cm, anio, historia, precio, estado, imagen_url, imagen_ancho, imagen_alto, paleta, medidas,
   }))
 ).replace(/</g, "\\u003c");
+const sitio = JSON.stringify({ wa: c.t("contacto.whatsapp").replace(/\D/g, "") });
 const portada = obras.find((o) => o.destacada) ?? obras[0];
 ---
 <Base
-  titulo="Sam Velásquez | Obras que nacen del alma"
-  descripcion="Galería de Sam Velásquez, artista de Medellín. Pinturas y esculturas creadas con intención. Conoce la historia de cada obra y adquiérela por WhatsApp."
+  titulo={c.t("seo.titulo")}
+  descripcion={c.t("seo.descripcion")}
 >
   <Fragment slot="head">
     {portada && <link rel="preload" href={portada.imagen_url} as="image" />}
@@ -48,22 +50,23 @@ const portada = obras.find((o) => o.destacada) ?? obras[0];
     </script>
   </Fragment>
   <Intro />
-  <Nav />
+  <Nav c={c} />
   <main>
-    <Hero obras={obras} />
-    <Galeria obras={obras} error={error} />
-    <Artista />
-    <Inspiracion />
-    <Tecnicas />
-    <Evolucion />
-    <Ritual />
-    <Enfoque />
-    <Comienzo />
-    <Contacto />
+    <Hero obras={obras} c={c} />
+    <Galeria obras={obras} error={error} c={c} />
+    <Artista c={c} />
+    <Inspiracion c={c} />
+    <Tecnicas c={c} />
+    <Evolucion c={c} />
+    <Ritual c={c} />
+    <Enfoque c={c} />
+    <Comienzo c={c} />
+    <Contacto c={c} />
   </main>
-  <Pie />
+  <Pie c={c} />
   <Ficha />
   <script type="application/json" id="datos-obras" set:html={datos}></script>
+  <script type="application/json" id="datos-sitio" set:html={sitio}></script>
   <script>
     import "../scripts/sitio.js";
   </script>

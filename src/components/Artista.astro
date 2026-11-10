@@ -1,14 +1,20 @@
+---
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
+const foto = c.img("artista.foto");
+const foto2 = c.img("artista.foto2");
+---
 <section class="artista" id="artista">
       <canvas class="trazos" data-trazos="artista" aria-hidden="true"></canvas>
       <figure class="artista__foto" data-rev>
-        <img src="/assets/fotos/sam-presentacion.webp" width="1280" height="1600" loading="lazy" alt="Sam Velásquez sentado con camisa manchada de pintura frente a Noches Oscuras del Alma">
+        <img src={foto.src} width={foto.ancho} height={foto.alto} loading="lazy" alt={foto.alt}>
       </figure>
       <div class="artista__texto">
-        <h2 class="titulo" data-rev>Un espacio donde el arte se convierte en intención</h2>
-        <p data-rev>Soy Sam Velásquez, y cada una de mis obras nace desde una conexión profunda con el alma, la emoción y la energía.</p>
-        <p data-rev>Creo en el arte como una herramienta de transformación, capaz de llenar los espacios de luz, significado y propósito.</p>
+        <h2 class="titulo" data-rev>{c.t("artista.titulo")}</h2>
+        {c.parrafos("artista.texto").map((p) => <p data-rev>{p}</p>)}
         <figure class="artista__mano" data-rev>
-          <img src="/assets/fotos/sam-alfombra.webp" width="1280" height="1600" loading="lazy" alt="Sam recostado sobre una alfombra de colores con un pincel en la mano">
+          <img src={foto2.src} width={foto2.ancho} height={foto2.alto} loading="lazy" alt={foto2.alt}>
         </figure>
       </div>
     </section>

@@ -1,0 +1,520 @@
+[
+  {
+    "seccion": "general",
+    "titulo": "General y contacto",
+    "campos": [
+      {
+        "clave": "seo.titulo",
+        "etiqueta": "Título de la página (pestaña y Google)",
+        "tipo": "linea",
+        "valor": "Sam Velásquez | Obras que nacen del alma"
+      },
+      {
+        "clave": "seo.descripcion",
+        "etiqueta": "Descripción para Google y redes",
+        "tipo": "largo",
+        "valor": "Galería de Sam Velásquez, artista de Medellín. Pinturas y esculturas creadas con intención. Conoce la historia de cada obra y adquiérela por WhatsApp."
+      },
+      {
+        "clave": "contacto.whatsapp",
+        "etiqueta": "WhatsApp (con indicativo, solo números)",
+        "tipo": "linea",
+        "valor": "573205003237",
+        "ayuda": "Ejemplo: 573205003237. Lo usan todos los botones de WhatsApp."
+      },
+      {
+        "clave": "contacto.whatsapp_visible",
+        "etiqueta": "WhatsApp como se lee",
+        "tipo": "linea",
+        "valor": "320 500 3237"
+      },
+      {
+        "clave": "contacto.correo",
+        "etiqueta": "Correo",
+        "tipo": "linea",
+        "valor": "samuelandresosoriovelasquez@gmail.com"
+      },
+      {
+        "clave": "contacto.instagram",
+        "etiqueta": "Usuario de Instagram (sin @)",
+        "tipo": "linea",
+        "valor": "samvelasquezart"
+      },
+      {
+        "clave": "mensajes.saludo",
+        "etiqueta": "Mensaje de WhatsApp del botón “Escríbeme”",
+        "tipo": "largo",
+        "valor": "Hola Sam, vi tu galería web y quisiera hablar contigo sobre tu arte."
+      },
+      {
+        "clave": "mensajes.encargo",
+        "etiqueta": "Mensaje de WhatsApp de “Encargar una obra”",
+        "tipo": "largo",
+        "valor": "Hola Sam, vi tu galería web y me gustaría encargar una obra con una intención especial."
+      },
+      {
+        "clave": "pie.texto",
+        "etiqueta": "Texto del pie de página",
+        "tipo": "linea",
+        "valor": "© 2026 Sam Velásquez. Medellín, Colombia."
+      }
+    ]
+  },
+  {
+    "seccion": "hero",
+    "titulo": "Portada",
+    "campos": [
+      {
+        "clave": "hero.nombre",
+        "etiqueta": "Nombre",
+        "tipo": "linea",
+        "valor": "Sam"
+      },
+      {
+        "clave": "hero.apellido",
+        "etiqueta": "Apellido",
+        "tipo": "linea",
+        "valor": "Velásquez"
+      },
+      {
+        "clave": "hero.lema",
+        "etiqueta": "Frase",
+        "tipo": "largo",
+        "valor": "Obras que nacen del alma y se convierten en intención."
+      },
+      {
+        "clave": "hero.boton",
+        "etiqueta": "Botón",
+        "tipo": "linea",
+        "valor": "Ver la galería"
+      }
+    ]
+  },
+  {
+    "seccion": "galeria",
+    "titulo": "Galería",
+    "campos": [
+      {
+        "clave": "galeria.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "La galería"
+      },
+      {
+        "clave": "galeria.ayuda",
+        "etiqueta": "Texto bajo el título",
+        "tipo": "linea",
+        "valor": "Abre cualquier lienzo para conocer su historia."
+      },
+      {
+        "clave": "galeria.frase",
+        "etiqueta": "Frase al final del muro",
+        "tipo": "largo",
+        "valor": "“Más que observar,\nte invito a sentir.”"
+      },
+      {
+        "clave": "galeria.boton",
+        "etiqueta": "Botón de encargo",
+        "tipo": "linea",
+        "valor": "Encargar una obra"
+      },
+      {
+        "clave": "galeria.vacia",
+        "etiqueta": "Texto cuando no hay obras",
+        "tipo": "linea",
+        "valor": "Muy pronto habrá nuevas obras en este muro."
+      }
+    ]
+  },
+  {
+    "seccion": "artista",
+    "titulo": "El artista",
+    "campos": [
+      {
+        "clave": "artista.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "Un espacio donde el arte se convierte en intención"
+      },
+      {
+        "clave": "artista.texto",
+        "etiqueta": "Texto",
+        "tipo": "largo",
+        "ayuda": "Deja una línea en blanco entre párrafos.",
+        "valor": "Soy Sam Velásquez, y cada una de mis obras nace desde una conexión profunda con el alma, la emoción y la energía.\n\nCreo en el arte como una herramienta de transformación, capaz de llenar los espacios de luz, significado y propósito."
+      },
+      {
+        "clave": "artista.foto",
+        "etiqueta": "Foto grande",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/sam-presentacion.webp",
+        "ancho": 1280,
+        "alto": 1600,
+        "alt": "Sam Velásquez sentado con camisa manchada de pintura frente a Noches Oscuras del Alma"
+      },
+      {
+        "clave": "artista.foto2",
+        "etiqueta": "Foto pequeña",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/sam-alfombra.webp",
+        "ancho": 1280,
+        "alto": 1600,
+        "alt": "Sam recostado sobre una alfombra de colores con un pincel en la mano"
+      }
+    ]
+  },
+  {
+    "seccion": "inspiracion",
+    "titulo": "Inspiración",
+    "campos": [
+      {
+        "clave": "inspiracion.texto",
+        "etiqueta": "Frase grande",
+        "tipo": "largo",
+        "ayuda": "Las palabras entre *asteriscos* salen resaltadas con color.",
+        "valor": "Mis obras se inspiran en la *naturaleza*, la *energía* y la *espiritualidad* que habita en lo cotidiano."
+      },
+      {
+        "clave": "inspiracion.sub",
+        "etiqueta": "Texto pequeño",
+        "tipo": "largo",
+        "valor": "Animales, formas orgánicas y cuerpos celestes se convierten en metáforas de transformación, equilibrio y conexión interior."
+      }
+    ]
+  },
+  {
+    "seccion": "tecnicas",
+    "titulo": "Técnicas",
+    "campos": [
+      {
+        "clave": "tecnicas.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "Técnicas"
+      },
+      {
+        "clave": "tecnicas.1.titulo",
+        "etiqueta": "Técnica 1: nombre",
+        "tipo": "linea",
+        "valor": "Técnica mixta"
+      },
+      {
+        "clave": "tecnicas.1.texto",
+        "etiqueta": "Técnica 1: texto",
+        "tipo": "largo",
+        "valor": "Acrílico, óleo y estuco plástico para crear profundidad visual y riqueza material, junto a esculturas moldeadas en arcilla."
+      },
+      {
+        "clave": "tecnicas.1.imagen",
+        "etiqueta": "Técnica 1: imagen",
+        "tipo": "imagen",
+        "valor": "/assets/obras/jardin-dual.webp",
+        "ancho": 590,
+        "alto": 654,
+        "alt": "Detalle de Jardín Dual"
+      },
+      {
+        "clave": "tecnicas.2.titulo",
+        "etiqueta": "Técnica 2: nombre",
+        "tipo": "linea",
+        "valor": "Relieve y texturización"
+      },
+      {
+        "clave": "tecnicas.2.texto",
+        "etiqueta": "Técnica 2: texto",
+        "tipo": "largo",
+        "valor": "El estuco plástico genera volumen, movimiento y una experiencia sensorial más allá de lo visual."
+      },
+      {
+        "clave": "tecnicas.2.imagen",
+        "etiqueta": "Técnica 2: imagen",
+        "tipo": "imagen",
+        "valor": "/assets/obras/danza-estelar.webp",
+        "ancho": 590,
+        "alto": 589,
+        "alt": "Detalle de Danza Estelar"
+      },
+      {
+        "clave": "tecnicas.3.titulo",
+        "etiqueta": "Técnica 3: nombre",
+        "tipo": "linea",
+        "valor": "Capa y superposición"
+      },
+      {
+        "clave": "tecnicas.3.texto",
+        "etiqueta": "Técnica 3: texto",
+        "tipo": "largo",
+        "valor": "Múltiples capas de pintura dejan que la energía y el proceso se acumulen en el lienzo."
+      },
+      {
+        "clave": "tecnicas.3.imagen",
+        "etiqueta": "Técnica 3: imagen",
+        "tipo": "imagen",
+        "valor": "/assets/obras/amor-que-sostiene.webp",
+        "ancho": 590,
+        "alto": 600,
+        "alt": "Detalle de Amor que Sostiene"
+      },
+      {
+        "clave": "tecnicas.4.titulo",
+        "etiqueta": "Técnica 4: nombre",
+        "tipo": "linea",
+        "valor": "Intención energética"
+      },
+      {
+        "clave": "tecnicas.4.texto",
+        "etiqueta": "Técnica 4: texto",
+        "tipo": "largo",
+        "valor": "Un proceso ritual carga cada obra con una intención específica, como armonía, abundancia o paz."
+      },
+      {
+        "clave": "tecnicas.4.imagen",
+        "etiqueta": "Técnica 4: imagen",
+        "tipo": "imagen",
+        "valor": "/assets/obras/el-viaje-hacia-adentro.webp",
+        "ancho": 452,
+        "alto": 589,
+        "alt": "Detalle de El Viaje Hacia Adentro"
+      }
+    ]
+  },
+  {
+    "seccion": "evolucion",
+    "titulo": "Trayectoria",
+    "campos": [
+      {
+        "clave": "evolucion.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "De la infancia al gran formato"
+      },
+      {
+        "clave": "evolucion.texto",
+        "etiqueta": "Texto",
+        "tipo": "largo",
+        "ayuda": "Deja una línea en blanco entre párrafos.",
+        "valor": "Desde mis primeras creaciones en la infancia, el arte ha sido mi forma natural de expresión. Con el tiempo, mi práctica trascendió lo estético para convertirse en un canal de exploración interior y propósito.\n\nHe comercializado varias obras de gran formato, permitiendo que mi arte habite y transforme ambientes desde la intención."
+      },
+      {
+        "clave": "evolucion.foto",
+        "etiqueta": "Foto",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/infancia.webp",
+        "ancho": 900,
+        "alto": 867,
+        "alt": "Sam de niño, sonriendo y abrazando un peluche"
+      }
+    ]
+  },
+  {
+    "seccion": "ritual",
+    "titulo": "Ritual energético",
+    "campos": [
+      {
+        "clave": "ritual.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "Ritual energético"
+      },
+      {
+        "clave": "ritual.texto",
+        "etiqueta": "Texto",
+        "tipo": "largo",
+        "valor": "Cada obra es acompañada por un proceso de intención consciente que la armoniza y la carga, convirtiéndola en un canal de energía, equilibrio y significado."
+      },
+      {
+        "clave": "ritual.practicas",
+        "etiqueta": "Prácticas de la cinta",
+        "tipo": "largo",
+        "ayuda": "Una por línea.",
+        "valor": "Ho’oponopono\nVibración de cuencos\nInciensos\nLuz solar\nCuarzos\nMantras"
+      },
+      {
+        "clave": "ritual.foto1",
+        "etiqueta": "Foto 1",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/ritual-sentado.webp",
+        "ancho": 581,
+        "alto": 1000,
+        "alt": ""
+      },
+      {
+        "clave": "ritual.foto2",
+        "etiqueta": "Foto 2",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/ritual-cuarzos.webp",
+        "ancho": 648,
+        "alto": 1100,
+        "alt": ""
+      },
+      {
+        "clave": "ritual.foto3",
+        "etiqueta": "Foto 3",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/ritual-cuencos.webp",
+        "ancho": 574,
+        "alto": 1000,
+        "alt": ""
+      }
+    ]
+  },
+  {
+    "seccion": "enfoque",
+    "titulo": "Obra pensada contigo",
+    "campos": [
+      {
+        "clave": "enfoque.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "Una obra pensada contigo"
+      },
+      {
+        "clave": "enfoque.intro",
+        "etiqueta": "Introducción",
+        "tipo": "largo",
+        "valor": "Cada obra puede nacer desde un propósito específico definido junto al cliente."
+      },
+      {
+        "clave": "enfoque.1.titulo",
+        "etiqueta": "Punto 1: título",
+        "tipo": "linea",
+        "valor": "Arte con propósito"
+      },
+      {
+        "clave": "enfoque.1.texto",
+        "etiqueta": "Punto 1: texto",
+        "tipo": "largo",
+        "valor": "Una pieza con significado, que trasciende lo estético para convertirse en un medio de expresión emocional y espiritual."
+      },
+      {
+        "clave": "enfoque.2.titulo",
+        "etiqueta": "Punto 2: título",
+        "tipo": "linea",
+        "valor": "Intención energética"
+      },
+      {
+        "clave": "enfoque.2.texto",
+        "etiqueta": "Punto 2: texto",
+        "tipo": "largo",
+        "valor": "Propósitos como armonía, abundancia, paz, claridad y expansión, según la energía que desees manifestar en el espacio."
+      },
+      {
+        "clave": "enfoque.3.titulo",
+        "etiqueta": "Punto 3: título",
+        "tipo": "linea",
+        "valor": "Transformación del espacio"
+      },
+      {
+        "clave": "enfoque.3.texto",
+        "etiqueta": "Punto 3: texto",
+        "tipo": "largo",
+        "valor": "Belleza, y también equilibrio, conexión y bienestar para quienes la experimentan."
+      },
+      {
+        "clave": "enfoque.foto",
+        "etiqueta": "Foto",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/sam-ventana.webp",
+        "ancho": 1280,
+        "alto": 1600,
+        "alt": "Sam sentado en el piso de su estudio frente a Noches Oscuras del Alma"
+      }
+    ]
+  },
+  {
+    "seccion": "comienzo",
+    "titulo": "Esto es solo el comienzo",
+    "campos": [
+      {
+        "clave": "comienzo.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "Esto es solo el comienzo"
+      },
+      {
+        "clave": "comienzo.texto",
+        "etiqueta": "Texto",
+        "tipo": "largo",
+        "valor": "Trabajar conmigo es crear una obra que no solo habite tu espacio, sino que conecte con tu energía y lo que deseas para tu vida."
+      },
+      {
+        "clave": "comienzo.foto1",
+        "etiqueta": "Polaroid 1",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/paleta-cuarzos.webp",
+        "ancho": 668,
+        "alto": 1000,
+        "alt": "Paleta de colores con dos cuarzos"
+      },
+      {
+        "clave": "comienzo.foto2",
+        "etiqueta": "Polaroid 2",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/pintando-colibri.webp",
+        "ancho": 511,
+        "alto": 800,
+        "alt": "Mano pintando un colibrí"
+      },
+      {
+        "clave": "comienzo.foto3",
+        "etiqueta": "Polaroid 3",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/espera-angel.webp",
+        "ancho": 534,
+        "alto": 800,
+        "alt": "El artista frente a Noches Oscuras del Alma"
+      },
+      {
+        "clave": "comienzo.foto4",
+        "etiqueta": "Polaroid 4",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/firma.webp",
+        "ancho": 535,
+        "alto": 800,
+        "alt": "Tarjeta con la firma del artista junto a una obra"
+      },
+      {
+        "clave": "comienzo.foto5",
+        "etiqueta": "Polaroid 5",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/con-perro.webp",
+        "ancho": 535,
+        "alto": 800,
+        "alt": "El artista con su perro en el estudio"
+      }
+    ]
+  },
+  {
+    "seccion": "contacto",
+    "titulo": "Cierre y contacto",
+    "campos": [
+      {
+        "clave": "contacto.titulo",
+        "etiqueta": "Título",
+        "tipo": "linea",
+        "valor": "Infinitas gracias"
+      },
+      {
+        "clave": "contacto.texto",
+        "etiqueta": "Texto",
+        "tipo": "largo",
+        "valor": "Que cada obra sea un recordatorio de la luz, la intención y la energía que habita en todo."
+      },
+      {
+        "clave": "contacto.boton",
+        "etiqueta": "Botón",
+        "tipo": "linea",
+        "valor": "Escríbeme"
+      },
+      {
+        "clave": "contacto.foto",
+        "etiqueta": "Foto",
+        "tipo": "imagen",
+        "valor": "/assets/fotos/sam-pincel.webp",
+        "ancho": 1280,
+        "alto": 1600,
+        "alt": "Retrato de Sam Velásquez con un pincel frente a su obra"
+      }
+    ]
+  }
+]

@@ -2,6 +2,15 @@ import { createClient } from "@supabase/supabase-js";
 import iniciales from "../data/obras-iniciales.json";
 
 export type Soporte = "lienzo" | "madera" | "escultura" | "otro";
+export type Estado = "disponible" | "reservada" | "vendida" | "no_disponible";
+
+/* Cómo se nombra cada estado en el panel y en la cartela del muro. */
+export const ESTADOS: Record<Estado, { panel: string; cartela: string }> = {
+  disponible: { panel: "Disponible", cartela: "" },
+  reservada: { panel: "Reservada", cartela: "Reservada" },
+  vendida: { panel: "Vendida", cartela: "Colección privada" },
+  no_disponible: { panel: "No disponible", cartela: "No disponible" },
+};
 
 export interface FilaObra {
   id?: string;
@@ -14,7 +23,7 @@ export interface FilaObra {
   anio: number | null;
   historia: string;
   precio: string | null;
-  vendida: boolean;
+  estado: Estado;
   visible: boolean;
   destacada: boolean;
   orden: number;
@@ -54,6 +63,7 @@ function completar(f: FilaObra): Obra {
     ...f,
     ancho_cm: f.ancho_cm == null ? null : Number(f.ancho_cm),
     alto_cm: f.alto_cm == null ? null : Number(f.alto_cm),
+    estado: f.estado ?? "disponible",
     paleta: f.paleta && f.paleta.length ? f.paleta : ["#f4b6c8", "#a9d8ef", "#f6e7a1"],
     imagen_url: urlImagen(f.imagen_path),
     medidas: textoMedidas(f),

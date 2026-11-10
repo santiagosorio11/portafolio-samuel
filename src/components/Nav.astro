@@ -1,11 +1,13 @@
 ---
 import Icono from "./Icono.astro";
-import { enlaceWa, MENSAJES } from "../lib/contacto";
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
 ---
 <header class="nav" id="nav">
-    <a class="nav__marca" href="#inicio" aria-label="Sam Velásquez, inicio">
+    <a class="nav__marca" href="#inicio" aria-label={c.t("hero.nombre") + " " + c.t("hero.apellido") + ", inicio"}>
       <img src="/assets/marca/sol.webp" width="1004" height="1218" alt="">
-      <span>Sam Velásquez</span>
+      <span>{c.t("hero.nombre")} {c.t("hero.apellido")}</span>
     </a>
     <nav class="nav__enlaces" id="nav-enlaces" aria-label="Secciones">
       <a href="#galeria">Galería</a>
@@ -14,6 +16,6 @@ import { enlaceWa, MENSAJES } from "../lib/contacto";
       <a href="#ritual">Ritual</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="boton boton--oro nav__cta" href={enlaceWa(MENSAJES.saludo)} target="_blank" rel="noopener"><Icono n="whatsapp" />Escríbeme</a>
+    <a class="boton boton--oro nav__cta" href={c.wa(c.t("mensajes.saludo"))} target="_blank" rel="noopener"><Icono n="whatsapp" />{c.t("contacto.boton")}</a>
     <button class="nav__menu" id="nav-menu" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-enlaces"><Icono n="menu" /></button>
   </header>

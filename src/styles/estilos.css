@@ -422,7 +422,7 @@ html:not(.js) .cartela { opacity: 1; }
 .ficha__datos dt { font-size: .84rem; color: #6e4a36; }
 .ficha__datos dd { font-weight: 500; line-height: 1.3; }
 .ficha__info h3 { font: 400 1.5rem/1.1 var(--display); margin-top: 24px; }
-.ficha__historia { margin-top: 8px; }
+.ficha__historia { margin-top: 8px; white-space: pre-line; }
 .ficha__escala { display: flex; align-items: flex-end; gap: 14px; margin-top: 18px; }
 .ficha__escala svg { width: 158px; flex: none; }
 .ficha__escala p { font-size: .9rem; line-height: 1.35; padding-bottom: 8px; color: #5c3a2c; }

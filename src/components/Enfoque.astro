@@ -1,21 +1,22 @@
+---
+import type { Contenido } from "../lib/contenido";
+interface Props { c: Contenido }
+const { c } = Astro.props;
+const foto = c.img("enfoque.foto");
+const colores = ["var(--rosa)", "var(--limon)", "var(--cielo)"];
+---
 <section class="enfoque" id="enfoque">
       <figure class="enfoque__foto">
-        <img src="/assets/fotos/sam-ventana.webp" width="1280" height="1600" loading="lazy" alt="Sam sentado en el piso de su estudio frente a Noches Oscuras del Alma">
+        <img src={foto.src} width={foto.ancho} height={foto.alto} loading="lazy" alt={foto.alt}>
       </figure>
       <div class="enfoque__lista">
-        <h2 class="titulo" data-rev>Una obra pensada contigo</h2>
-        <p class="enfoque__intro" data-rev>Cada obra puede nacer desde un propósito específico definido junto al cliente.</p>
-        <article data-rev style="--c:var(--rosa)">
-          <h3>Arte con propósito</h3>
-          <p>Una pieza con significado, que trasciende lo estético para convertirse en un medio de expresión emocional y espiritual.</p>
-        </article>
-        <article data-rev style="--c:var(--limon)">
-          <h3>Intención energética</h3>
-          <p>Propósitos como armonía, abundancia, paz, claridad y expansión, según la energía que desees manifestar en el espacio.</p>
-        </article>
-        <article data-rev style="--c:var(--cielo)">
-          <h3>Transformación del espacio</h3>
-          <p>Belleza, y también equilibrio, conexión y bienestar para quienes la experimentan.</p>
-        </article>
+        <h2 class="titulo" data-rev>{c.t("enfoque.titulo")}</h2>
+        <p class="enfoque__intro" data-rev>{c.t("enfoque.intro")}</p>
+        {colores.map((color, i) => (
+          <article data-rev style={"--c:" + color}>
+            <h3>{c.t(`enfoque.${i + 1}.titulo`)}</h3>
+            <p>{c.t(`enfoque.${i + 1}.texto`)}</p>
+          </article>
+        ))}
       </div>
     </section>
