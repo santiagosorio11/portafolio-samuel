@@ -45,7 +45,7 @@ var vigia = "IntersectionObserver" in window ? new IntersectionObserver(function
   });
 }, { threshold: 0.14, rootMargin: "0px 0px -6% 0px" }) : null;
 
-$$("[data-rev], .obra, .polaroids, .tecnicas .tiras").forEach(function (el) {
+$$("[data-rev], .obra, .polaroids, .tecnicas .tiras, .ritual__fotos").forEach(function (el) {
   if (vigia) vigia.observe(el); else el.classList.add("visto");
 });
 
