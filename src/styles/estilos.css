@@ -250,8 +250,20 @@ body::after {
 .galeria__cabeza .titulo { font-size: clamp(3.25rem, 8vw, 7.5rem); }
 .pared { position: relative; max-width: 1500px; margin: 0 auto; container-type: inline-size; height: auto; }
 .pared::before { content: ""; display: block; height: calc(var(--alto) * 1cqw); }
-.obra { position: absolute; left: calc(var(--x) * 1cqw); top: calc(var(--y) * 1cqw); width: calc(var(--w) * 1cqw); transition: opacity .4s; }
-.pared:has(.lienzo:hover) .obra:not(:has(.lienzo:hover)) { opacity: .72; }
+.obra { position: absolute; left: calc(var(--x) * 1cqw); top: calc(var(--y) * 1cqw); width: calc(var(--w) * 1cqw); }
+
+/* Resaltado: la obra se eleva y aparece un marco dorado que se abre alrededor. */
+.obra .lienzo__giro { transition: translate .45s var(--curva); }
+.obra .lienzo__cuerpo { outline: 2px solid transparent; outline-offset: 0; transition: transform .35s var(--curva), box-shadow .35s var(--curva), outline-color .45s var(--curva), outline-offset .45s var(--curva); }
+.obra .cartela h3 { transition: color .35s; }
+@media (hover: hover) {
+  .obra:has(.lienzo:hover) .lienzo__giro { translate: 0 -8px; }
+  .obra:has(.lienzo:hover) .lienzo__cuerpo { outline-color: var(--oro); outline-offset: 10px; }
+  .obra:has(.lienzo:hover) .cartela h3 { color: var(--cafe); }
+}
+.obra:has(.lienzo:focus-visible) .lienzo__cuerpo { outline-color: var(--oro); outline-offset: 10px; }
+.obra:has(.lienzo:active) .lienzo__giro { translate: 0 -4px; }
+.obra:has(.lienzo:active) .lienzo__cuerpo { outline-color: var(--oro); outline-offset: 6px; }
 
 .js .obra .lienzo__giro { opacity: 0; }
 .js .obra.visto .lienzo__giro { opacity: 1; animation: colgar 1.5s cubic-bezier(.3, .7, .3, 1) var(--d) backwards; }
@@ -286,6 +298,15 @@ html:not(.js) .cartela { opacity: 1; }
   .cartela p { font-size: .8125rem; }
   .pared__frase { max-width: 720px; padding-left: 4%; }
   .pared__frase p { font-size: clamp(2rem, 8.4vw, 3.5rem); }
+}
+/* Teléfono: una obra por fila, a todo el ancho. */
+@media (max-width: 640px) {
+  .pared { display: flex; flex-direction: column; gap: 56px; padding: 0 12px; }
+  .pared::before { display: none; }
+  .obra { position: relative; left: auto; top: auto; width: 100%; }
+  .obra--escultura { width: 78%; margin: 0 auto; }
+  .cartela h3 { font-size: 1.35rem; }
+  .cartela p { font-size: .875rem; }
 }
 
 /* ---------- Artista ---------- */
