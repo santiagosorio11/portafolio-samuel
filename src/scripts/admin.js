@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import iconos from "../data/iconos.json";
 import secciones from "../data/contenido.json";
 
-var sb = createClient(import.meta.env.PUBLIC_SUPABASE_URL, import.meta.env.PUBLIC_SUPABASE_ANON_KEY);
+var sb = createClient(import.meta.env.PUBLIC_SUPABASE_URL, import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 var BUCKET = "obras";
 var $ = function (s, c) { return (c || document).querySelector(s); };
 var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };

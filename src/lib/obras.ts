@@ -40,7 +40,7 @@ export interface Obra extends FilaObra {
 
 export const BUCKET = "obras";
 const URL_SB = import.meta.env.PUBLIC_SUPABASE_URL as string | undefined;
-const LLAVE_SB = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
+const LLAVE_SB = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY as string | undefined;
 export const supabaseConfigurado = Boolean(URL_SB && LLAVE_SB);
 
 /* "140 x 110 cm": el lado mayor primero, como en el dossier. Las esculturas muestran su alto. */

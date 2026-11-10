@@ -13,8 +13,8 @@ Sin Supabase configurado, el sitio funciona con las obras de `src/data/obras-ini
    insert into public.admins (user_id) select id from auth.users where email = 'CORREO-DE-SAMUEL';
    ```
 4. **Cerrar registros:** en *Authentication > Sign In / Providers > Email*, desactiva "Allow new users to sign up". Aunque alguien se registre, no podría editar nada, pero así queda más limpio.
-5. **Correos de recuperación:** en *Authentication > URL Configuration* pon como *Site URL* el dominio del sitio y agrega `https://TU-DOMINIO/admin` en *Redirect URLs*.
-6. **Variables:** copia `.env.example` como `.env` y llena `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY` y, solo para el paso siguiente, `SUPABASE_SECRET_KEY` (*Project Settings > API Keys > Secret keys*, empieza por `sb_secret_`).
+5. **Correos de recuperación:** en *Authentication > URL Configuration* pon como *Site URL* el dominio del sitio y agrega `https://samvelasquezart.com/admin` en *Redirect URLs*.
+6. **Variables:** copia `.env.example` como `.env` y llena `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_PUBLISHABLE_KEY` (*Project Settings > API Keys > Publishable key*, empieza por `sb_publishable_`) y, solo para el paso siguiente, `SUPABASE_SECRET_KEY` (*Project Settings > API Keys > Secret keys*, empieza por `sb_secret_`).
 7. **Subir las obras del dossier:** `npm run sembrar`. Después puedes borrar la llave secreta del `.env`.
 
 ## Publicar en Vercel
@@ -22,13 +22,13 @@ Sin Supabase configurado, el sitio funciona con las obras de `src/data/obras-ini
 Importa el repositorio en Vercel (detecta Astro solo) y agrega solo estas dos variables de entorno:
 
 - `PUBLIC_SUPABASE_URL`
-- `PUBLIC_SUPABASE_ANON_KEY`
+- `PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
 La llave secreta nunca va en Vercel.
 
 ## Día a día
 
-- Samuel entra a `https://TU-DOMINIO/admin` con su correo y contraseña.
+- Samuel entra a `https://samvelasquezart.com/admin` con su correo y contraseña.
 - **Obras:** subir una obra o varias fotos a la vez (botón “Subir varias fotos” o arrastrándolas a la página; quedan ocultas con el nombre del archivo como título para completarlas después). Editar, ocultar, elegir las de la portada, cambiar el orden del muro, filtrar, buscar y eliminar. Las fotos se reducen solas antes de subirse.
 - **Venta:** cada obra tiene un estado que se cambia desde la lista o el editor:
   - *Disponible*: muestra el precio (o “Precio a consultar”) y el botón “Me interesa esta obra”.

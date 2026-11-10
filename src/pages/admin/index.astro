@@ -2,7 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import Icono from "../../components/Icono.astro";
 import "../../styles/admin.css";
-const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_ANON_KEY);
+const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY);
 ---
 <Base titulo="Panel | Sam Velásquez" descripcion="Administración de la galería." sinIndexar>
   <div class="adm">
@@ -23,7 +23,7 @@ const configurado = Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.e
       {!configurado && (
         <section class="adm-tarjeta adm-centro">
           <h1>Falta conectar Supabase</h1>
-          <p>Agrega PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_ANON_KEY al archivo .env (y en Vercel), y vuelve a iniciar el sitio.</p>
+          <p>Agrega PUBLIC_SUPABASE_URL y PUBLIC_SUPABASE_PUBLISHABLE_KEY al archivo .env (y en Vercel), y vuelve a iniciar el sitio.</p>
         </section>
       )}
 

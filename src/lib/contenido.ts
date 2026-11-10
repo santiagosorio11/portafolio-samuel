@@ -19,7 +19,7 @@ export interface Imagen { src: string; alt: string; ancho?: number; alto?: numbe
 export const SECCIONES = base as Seccion[];
 
 const URL_SB = import.meta.env.PUBLIC_SUPABASE_URL as string | undefined;
-const LLAVE_SB = import.meta.env.PUBLIC_SUPABASE_ANON_KEY as string | undefined;
+const LLAVE_SB = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY as string | undefined;
 
 /* Rutas que empiezan con "/" son archivos del proyecto; las demás viven en el bucket. */
 export function urlRecurso(valor: string) {
